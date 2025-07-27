@@ -38,6 +38,7 @@
   }
 
   async function updateBadgeIcon(label) {
+    console.log("update badge for label: ", label);
     let newUnreadCount = 0;
     const checkedAccounts = [];
 
@@ -47,6 +48,7 @@
     // no new ones
     for (let i = 0; i < 10; i++) {
       const feed = await getAtomFeed(label, i);
+      console.log("feed: ", feed);
       const emailTitle = getTitle(feed);
 
       // don't keep counting once we have checked all the accounts
@@ -57,6 +59,8 @@
       checkedAccounts.push(emailTitle);
       newUnreadCount += getUnreadCount(feed);
     }
+
+    console.log("new unread: ", newUnreadCount);
 
     if (newUnreadCount < 0) return;
 
